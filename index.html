@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="./manifest.json">
-  <title>AS Face Clean - iPhone Studio Pro</title>
+  <title>AS Face Clean - HD Smart Studio</title>
   <style>
     :root {
       --primary: #0284c7;
@@ -131,11 +131,10 @@
       margin-bottom: 12px;
     }
 
-    img {
+    canvas, img {
       width: 100%;
       height: auto;
       display: block;
-      transition: filter 0.1s ease-out;
     }
 
     .toggle-btn {
@@ -198,8 +197,8 @@
 
   <div class="container">
     <div class="logo-area">
-      <h1>AS Face Clean  Pro</h1>
-      <p>آئی فون اسٹوڈیو پورٹریٹ اور ایچ ڈی لُک</p>
+      <h1>AS Face Clean  HD</h1>
+      <p>پرفیکٹ سکن کلیئرنگ اور اسٹوڈیو پورٹریٹ ایفیکٹ</p>
     </div>
 
     <div class="upload-box" onclick="document.getElementById('imageInput').click()">
@@ -212,33 +211,33 @@
     <div class="loader" id="loadingSpinner"></div>
 
     <div class="editor-section" id="editorSection">
-      <!-- آئی فون پرو فلٹر کنٹرول سلائڈرز (بغیر ہینگ ہوئے) -->
+      <!-- کنٹرول سلائڈرز -->
       <div class="controls-box">
         <div class="control-group">
-          <label>آئی فون برائٹنس: <span id="brightVal">105</span>%</label>
-          <input type="range" id="brightnessRange" min="80" max="150" value="105" oninput="applyFilters()">
+          <label>برائٹنس (Brightness): <span id="brightVal">104</span>%</label>
+          <input type="range" id="brightnessRange" min="80" max="140" value="104" oninput="processImage()">
         </div>
         <div class="control-group">
-          <label>آئی فون کنٹراسٹ (ڈیپ لُک): <span id="contrastVal">125</span>%</label>
-          <input type="range" id="contrastRange" min="90" max="160" value="125" oninput="applyFilters()">
+          <label>کنٹراسٹ (Contrast): <span id="contrastVal">110</span>%</label>
+          <input type="range" id="contrastRange" min="90" max="140" value="110" oninput="processImage()">
         </div>
         <div class="control-group">
-          <label>سٹوڈیو کلر نکھار (Saturation): <span id="satVal">115</span>%</label>
-          <input type="range" id="satRange" min="80" max="150" value="115" oninput="applyFilters()">
+          <label>رنگ کا نکھار (Saturation): <span id="satVal">105</span>%</label>
+          <input type="range" id="satRange" min="80" max="130" value="105" oninput="processImage()">
         </div>
         <div class="control-group">
-          <label>اسکن گلو اور سمتھ (Blur Smooth): <span id="blurVal">0.6</span>px</label>
-          <input type="range" id="blurRange" min="0" max="2" step="0.2" value="0.6" oninput="applyFilters()">
+          <label>چہرہ صاف اور نرمی (Skin Smooth): <span id="smoothVal">4</span></label>
+          <input type="range" id="smoothRange" min="0" max="10" value="4" oninput="processImage()">
         </div>
       </div>
 
       <div class="image-container">
-        <img id="displayImage" src="" alt="iPhone Processed Image">
+        <img id="displayImage" src="" alt="Smart Processed Image">
       </div>
 
       <button class="toggle-btn" id="toggleBtn" onmousedown="showOriginal()" onmouseup="showProcessed()" ontouchstart="showOriginal()" ontouchend="showProcessed()">👆 اصل تصویر دیکھنے کے لیے دبا کر رکھیں (Before)</button>
 
-      <a href="#" id="downloadBtn" download="AS-Face-Clean-iPhone.jpg" class="download-btn">📥 آئی فون ایچ ڈی تصویر ڈاؤن لوڈ کریں</a>
+      <a href="#" id="downloadBtn" download="AS-Face-Clean-Pro.jpg" class="download-btn">📥 ایچ ڈی تصویر ڈاؤن لوڈ کریں</a>
     </div>
 
     <canvas id="canvas" style="display:none;"></canvas>
@@ -253,6 +252,8 @@
     const displayImage = document.getElementById('displayImage');
     const downloadBtn = document.getElementById('downloadBtn');
     
+    let originalImage = new Image();
+    let processedDataUrl = '';
     let originalDataUrl = '';
 
     imageInput.addEventListener('change', function(e) {
@@ -263,70 +264,75 @@
 
         const reader = new FileReader();
         reader.onload = function(event) {
-          originalDataUrl = event.target.result;
-          const img = new Image();
-          img.onload = function() {
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img, 0, 0);
-
-            displayImage.src = originalDataUrl;
-            applyFilters();
+          originalImage.onload = function() {
+            canvas.width = originalImage.width;
+            canvas.height = originalImage.height;
+            
+            originalDataUrl = event.target.result;
+            processImage();
 
             loadingSpinner.style.display = 'none';
             editorSection.style.display = 'block';
           }
-          img.src = originalDataUrl;
+          originalImage.src = event.target.result;
         }
         reader.readAsDataURL(file);
       }
     });
 
-    function applyFilters() {
+    function processImage() {
       const brightness = document.getElementById('brightnessRange').value;
       const contrast = document.getElementById('contrastRange').value;
       const saturation = document.getElementById('satRange').value;
-      const blur = document.getElementById('blurRange').value;
+      const smoothLevel = parseInt(document.getElementById('smoothRange').value);
 
       document.getElementById('brightVal').innerText = brightness;
       document.getElementById('contrastVal').innerText = contrast;
       document.getElementById('satVal').innerText = saturation;
-      document.getElementById('blurVal').innerText = blur;
-
-      // آئی فون کیمرہ جیسا طاقتور اور فوری فلٹر جو موبائل کو بالکل ہینگ نہیں ہونے دیتا
-      displayImage.style.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%) blur(${blur}px)`;
-    }
-
-    // فائنل ڈاؤن لوڈ کے وقت کینوس پر فلٹر پرنٹ کر کے سیو کرنا
-    function prepareDownload() {
-      const brightness = document.getElementById('brightnessRange').value;
-      const contrast = document.getElementById('contrastRange').value;
-      const saturation = document.getElementById('satRange').value;
-      const blur = document.getElementById('blurRange').value;
+      document.getElementById('smoothVal').innerText = smoothLevel;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.filter = `brightness(${brightness}%) contrast(${contrast}%) saturate(${saturation}%) blur(${blur}px)`;
       
-      const img = new Image();
-      img.src = originalDataUrl;
-      img.onload = function() {
-        ctx.drawImage(img, 0, 0);
-        downloadBtn.href = canvas.toDataURL('image/jpeg', 0.98);
+      // ایچ ڈی کلر گریڈنگ
+      ctx.filter = `contrast(${contrast}%) brightness(${brightness}%) saturate(${saturation}%)`;
+      ctx.drawImage(originalImage, 0, 0);
+
+      // سمارٹ سکن سمتھنگ جو صرف رف ٹونز اور داغ دھبے صاف کرے گی، تصویر نہیں پھاڑے گی
+      if (smoothLevel > 0) {
+        let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        let data = imgData.data;
+
+        for (let i = 0; i < data.length; i += 4) {
+          let r = data[i];
+          let g = data[i+1];
+          let b = data[i+2];
+          let avg = (r + g + b) / 3;
+
+          // قدرتی چہرے کی سکن رینج کو ہلکا سا روشن اور ملائم کرنا تاکہ سرخ یا دھندلا پن نہ آئے
+          if (avg > 40 && avg < 235 && r > g) { // سکن ٹোন ڈیٹیکشن
+            let factor = smoothLevel * 0.3;
+            data[i]   = Math.min(255, r + factor);
+            data[i+1] = Math.min(255, g + factor * 0.9);
+            data[i+2] = Math.min(255, b + factor * 0.8);
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
       }
+
+      processedDataUrl = canvas.toDataURL('image/jpeg', 0.98);
+      displayImage.src = processedDataUrl;
+      downloadBtn.href = processedDataUrl;
     }
 
     function showOriginal() {
-      displayImage.style.filter = 'none';
+      displayImage.src = originalDataUrl;
       document.getElementById('toggleBtn').innerText = "👁️ اصل تصویر (Before)";
     }
 
     function showProcessed() {
-      applyFilters();
+      displayImage.src = processedDataUrl;
       document.getElementById('toggleBtn').innerText = "👆 اصل تصویر دیکھنے کے لیے دبا کر رکھیں (Before)";
     }
-
-    // جب بھی ڈاؤن لوڈ بٹن پر کلک ہو یا سلائیڈر ہلایا جائے
-    document.querySelector('.controls-box').addEventListener('input', prepareDownload);
   </script>
 
 </body>
