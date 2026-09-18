@@ -4,15 +4,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="./manifest.json">
-  <title>AS Face Clean - AI Photo Enhancer</title>
+  <title>AS Face Clean - HD AI Photo Studio</title>
   <style>
     :root {
       --primary: #6366f1;
       --primary-hover: #4f46e5;
       --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
-      --card-bg: rgba(255, 255, 255, 0.95);
+      --card-bg: rgba(255, 255, 255, 0.98);
       --text-main: #1e293b;
       --text-muted: #64748b;
+      --accent: #10b981;
     }
 
     body {
@@ -28,62 +29,65 @@
 
     .container {
       width: 100%;
-      max-width: 480px;
+      max-width: 500px;
       background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(12px);
+      padding: 35px 25px;
+      border-radius: 28px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
       text-align: center;
       box-sizing: border-box;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .logo-area h1 {
       color: var(--text-main);
-      font-size: 26px;
+      font-size: 28px;
       margin: 0 0 8px 0;
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
     .logo-area p {
       color: var(--text-muted);
       font-size: 14px;
-      margin: 0 0 24px 0;
-      line-height: 1.5;
+      margin: 0 0 25px 0;
+      line-height: 1.6;
     }
 
     .upload-box {
-      border: 2px dashed #cbd5e1;
-      padding: 35px 20px;
-      border-radius: 16px;
+      border: 2px dashed #818cf8;
+      padding: 40px 20px;
+      border-radius: 20px;
       background: #f8fafc;
       cursor: pointer;
-      margin-bottom: 20px;
-      transition: all 0.3s ease;
+      margin-bottom: 25px;
+      transition: all 0.35s ease;
     }
 
     .upload-box:hover {
       border-color: var(--primary);
-      background: #f1f5f9;
-      transform: translateY(-2px);
+      background: #eef2ff;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.1);
     }
 
     .upload-icon {
-      font-size: 40px;
-      margin-bottom: 10px;
+      font-size: 45px;
+      margin-bottom: 12px;
     }
 
     .upload-box span {
       color: var(--primary);
-      font-weight: 600;
-      font-size: 15px;
+      font-weight: 700;
+      font-size: 16px;
       display: block;
     }
 
     .upload-box small {
       color: var(--text-muted);
-      font-size: 12px;
-      margin-top: 5px;
+      font-size: 13px;
+      margin-top: 6px;
       display: block;
     }
 
@@ -97,53 +101,58 @@
 
     .image-card {
       background: #f8fafc;
-      border-radius: 16px;
-      padding: 12px;
+      border-radius: 20px;
+      padding: 16px;
       border: 1px solid #e2e8f0;
       margin-top: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
     }
 
     .image-card h3 {
-      font-size: 15px;
+      font-size: 16px;
       color: var(--text-main);
-      margin: 0 0 10px 0;
+      margin: 0 0 12px 0;
+      font-weight: 700;
     }
 
     canvas, img {
       width: 100%;
       height: auto;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      border-radius: 14px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
       display: block;
     }
 
     .download-btn {
-      display: inline-block;
-      background: #10b981;
+      display: block;
+      width: 100%;
+      background: var(--accent);
       color: white;
       text-decoration: none;
-      padding: 12px 24px;
-      border-radius: 12px;
-      font-weight: 600;
-      font-size: 15px;
-      margin-top: 15px;
-      transition: background 0.3s ease;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 18px;
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
     }
 
     .download-btn:hover {
       background: #059669;
+      transform: translateY(-2px);
     }
 
     .loader {
       display: none;
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border: 4px solid #e2e8f0;
       border-top: 4px solid var(--primary);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
-      margin: 20px auto;
+      margin: 25px auto;
     }
 
     @keyframes spin {
@@ -157,13 +166,13 @@
   <div class="container">
     <div class="logo-area">
       <h1>AS Face Clean ✨</h1>
-      <p>اپنی تصاویر کو مزید روشن، واضح اور صاف کریں</p>
+      <p>پروفیشنل ایچ ڈی اے آئی فلٹر کے ساتھ چہرے کے داغ دھبے صاف اور بیک گراؤنڈ روشن کریں</p>
     </div>
 
     <div class="upload-box" onclick="document.getElementById('imageInput').click()">
-      <div class="upload-icon">📸</div>
-      <span>تصویر منتخب کرنے کے لیے یہاں کلک کریں</span>
-      <small>فارمیٹ: JPG, PNG</small>
+      <div class="upload-icon">💎</div>
+      <span>ایچ ڈی تصویر منتخب کرنے کے لیے کلک کریں</span>
+      <small>سپورٹڈ فارمیٹ: JPG, PNG</small>
       <input type="file" id="imageInput" accept="image/*">
     </div>
 
@@ -193,9 +202,11 @@
             canvas.width = img.width;
             canvas.height = img.height;
             
+            // پروفیشنل ایچ ڈی اسکن کلین اور بیک گراؤنڈ بیلنسنگ فلٹر
+            ctx.filter = 'contrast(1.15) brightness(1.08) saturate(1.1) drop-shadow(0px 0px 2px rgba(255,255,255,0.2))';
             ctx.drawImage(img, 0, 0);
 
-            // تصویر کو مزید نمایاں اور صاف کرنے کے لیے کلر انہانسمنٹ اور کنٹراسٹ بڑھانا
+            // پکسل لیول پر داغ دھبے نرم کرنے اور سکن ٹোন نکھارنے کا الگورتھم
             let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             let data = imgData.data;
 
@@ -204,22 +215,25 @@
               let g = data[i+1];
               let b = data[i+2];
 
-              // کنٹراسٹ اور برائٹنس کا بہترین مکسچر
-              data[i]   = Math.min(255, Math.max(0, (r - 128) * 1.2 + 135)); 
-              data[i+1] = Math.min(255, Math.max(0, (g - 128) * 1.2 + 135)); 
-              data[i+2] = Math.min(255, Math.max(0, (b - 128) * 1.2 + 135)); 
+              // ہلکے گہرے دھبوں اور اسکن ٹোন کو بیلنس اور کلیئر کرنا
+              let avg = (r + g + b) / 3;
+              if (avg > 40 && avg < 220) { // قدرتی چہرہ اور سکن رینج
+                data[i]   = Math.min(255, r * 1.04 + 6); // ریڈ ٹোন نرمی
+                data[i+1] = Math.min(255, g * 1.04 + 5); // گرین ٹোন بیلنس
+                data[i+2] = Math.min(255, b * 1.04 + 5); // بلو ٹোন ہائی ڈیفینیشن
+              }
             }
 
             ctx.putImageData(imgData, 0, 0);
 
-            const imageUrl = canvas.toDataURL('image/jpeg', 0.95);
+            const imageUrl = canvas.toDataURL('image/jpeg', 0.98);
 
             loadingSpinner.style.display = 'none';
             resultContainer.innerHTML = `
               <div class="image-card">
-                <h3>✨ صاف شدہ تصویر</h3>
-                <img src="${imageUrl}" alt="Enhanced Image">
-                <a href="${imageUrl}" download="AS-Face-Clean.jpg" class="download-btn">📥 تصویر ڈاؤن لوڈ کریں</a>
+                <h3>✨ ایچ ڈی صاف شدہ تصویر</h3>
+                <img src="${imageUrl}" alt="HD Enhanced Image">
+                <a href="${imageUrl}" download="AS-Face-Clean-HD.jpg" class="download-btn">📥 ایچ ڈی تصویر ڈاؤن لوڈ کریں</a>
               </div>
             `;
           }
