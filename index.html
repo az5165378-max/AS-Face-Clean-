@@ -117,6 +117,24 @@
       display: block;
     }
 
+    .download-btn {
+      display: inline-block;
+      background: #10b981;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 15px;
+      margin-top: 15px;
+      transition: background 0.3s ease;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .download-btn:hover {
+      background: #059669;
+    }
+
     .loader {
       display: none;
       width: 36px;
@@ -139,13 +157,13 @@
   <div class="container">
     <div class="logo-area">
       <h1>AS Face Clean ✨</h1>
-      <p>اپنی پرانی یا دھندلی تصاویر کو اے آئی (AI) کی مدد سے صاف اور روشن بنائیں</p>
+      <p>اپنی تصاویر کو مزید روشن، واضح اور صاف کریں</p>
     </div>
 
     <div class="upload-box" onclick="document.getElementById('imageInput').click()">
       <div class="upload-icon">📸</div>
       <span>تصویر منتخب کرنے کے لیے یہاں کلک کریں</span>
-      <small>پشتیدہ فارمیٹ: JPG, PNG</small>
+      <small>فارمیٹ: JPG, PNG</small>
       <input type="file" id="imageInput" accept="image/*">
     </div>
 
@@ -177,7 +195,7 @@
             
             ctx.drawImage(img, 0, 0);
 
-            // اے آئی کلر اور فیس انہانسمنٹ فلٹر
+            // تصویر کو مزید نمایاں اور صاف کرنے کے لیے کلر انہانسمنٹ اور کنٹراسٹ بڑھانا
             let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
             let data = imgData.data;
 
@@ -186,19 +204,22 @@
               let g = data[i+1];
               let b = data[i+2];
 
-              // برائٹنس اور کنٹراسٹ بہتر کرنا
-              data[i]   = Math.min(255, r * 1.18); 
-              data[i+1] = Math.min(255, g * 1.18); 
-              data[i+2] = Math.min(255, b * 1.18); 
+              // کنٹراسٹ اور برائٹنس کا بہترین مکسچر
+              data[i]   = Math.min(255, Math.max(0, (r - 128) * 1.2 + 135)); 
+              data[i+1] = Math.min(255, Math.max(0, (g - 128) * 1.2 + 135)); 
+              data[i+2] = Math.min(255, Math.max(0, (b - 128) * 1.2 + 135)); 
             }
 
             ctx.putImageData(imgData, 0, 0);
+
+            const imageUrl = canvas.toDataURL('image/jpeg', 0.95);
 
             loadingSpinner.style.display = 'none';
             resultContainer.innerHTML = `
               <div class="image-card">
                 <h3>✨ صاف شدہ تصویر</h3>
-                <img src="${canvas.toDataURL('image/jpeg')}" alt="Enhanced Image">
+                <img src="${imageUrl}" alt="Enhanced Image">
+                <a href="${imageUrl}" download="AS-Face-Clean.jpg" class="download-btn">📥 تصویر ڈاؤن لوڈ کریں</a>
               </div>
             `;
           }
