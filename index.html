@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="./manifest.json">
-  <title>AS Face Clean - HD AI Photo Studio</title>
+  <title>AS Face Clean - 100% iPhone HD Pro</title>
   <style>
     :root {
-      --primary: #6366f1;
-      --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+      --primary: #0284c7;
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e1b4b 100%);
       --card-bg: rgba(255, 255, 255, 0.98);
-      --text-main: #1e293b;
+      --text-main: #0f172a;
       --text-muted: #64748b;
-      --accent: #10b981;
+      --accent: #059669;
     }
 
     body {
@@ -33,7 +33,7 @@
       backdrop-filter: blur(12px);
       padding: 25px;
       border-radius: 28px;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
       text-align: center;
       box-sizing: border-box;
       border: 1px solid rgba(255, 255, 255, 0.2);
@@ -41,7 +41,7 @@
 
     .logo-area h1 {
       color: var(--text-main);
-      font-size: 24px;
+      font-size: 25px;
       margin: 0 0 5px 0;
       font-weight: 800;
     }
@@ -54,10 +54,10 @@
     }
 
     .upload-box {
-      border: 2px dashed #818cf8;
+      border: 2px dashed #38bdf8;
       padding: 25px 15px;
       border-radius: 18px;
-      background: #f8fafc;
+      background: #f0f9ff;
       cursor: pointer;
       margin-bottom: 15px;
       transition: all 0.35s ease;
@@ -65,7 +65,7 @@
 
     .upload-box:hover {
       border-color: var(--primary);
-      background: #eef2ff;
+      background: #e0f2fe;
     }
 
     .upload-icon {
@@ -102,7 +102,7 @@
       padding: 12px 15px;
       border-radius: 16px;
       margin-bottom: 15px;
-      max-height: 220px;
+      max-height: 230px;
       overflow-y: auto;
     }
 
@@ -129,7 +129,7 @@
       position: relative;
       border-radius: 14px;
       overflow: hidden;
-      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       margin-bottom: 12px;
     }
 
@@ -140,21 +140,22 @@
     }
 
     .toggle-btn {
-      background: #475569;
+      background: #334155;
       color: white;
       border: none;
-      padding: 10px 15px;
-      border-radius: 10px;
-      font-weight: 600;
-      font-size: 13px;
+      padding: 12px 15px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 14px;
       cursor: pointer;
       margin-bottom: 10px;
       transition: background 0.3s;
       width: 100%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
 
     .toggle-btn:hover {
-      background: #334155;
+      background: #1e293b;
     }
 
     .download-btn {
@@ -163,18 +164,18 @@
       background: var(--accent);
       color: white;
       text-decoration: none;
-      padding: 12px;
+      padding: 14px;
       border-radius: 12px;
       font-weight: 700;
-      font-size: 15px;
+      font-size: 16px;
       box-sizing: border-box;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+      box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35);
       text-align: center;
     }
 
     .download-btn:hover {
-      background: #059669;
+      background: #047857;
     }
 
     .loader {
@@ -198,8 +199,8 @@
 
   <div class="container">
     <div class="logo-area">
-      <h1>AS Face Clean ✨</h1>
-      <p>پروفیشنل فلٹرز اور بیفور/آفٹر کنٹرول کے ساتھ</p>
+      <h1>AS Face Clean  Pro</h1>
+      <p>100% اصلی آئی فون کیمرہ لُک اور ایڈوانسڈ ایچ ڈی فلٹرز</p>
     </div>
 
     <div class="upload-box" onclick="document.getElementById('imageInput').click()">
@@ -212,33 +213,33 @@
     <div class="loader" id="loadingSpinner"></div>
 
     <div class="editor-section" id="editorSection">
-      <!-- تمام فلٹرز کے کنٹرول سلائڈرز -->
+      <!-- آئی فون پرو فلٹر کنٹرول سلائڈرز -->
       <div class="controls-box">
         <div class="control-group">
-          <label>چمک (Brightness): <span id="brightVal">108</span>%</label>
-          <input type="range" id="brightnessRange" min="80" max="150" value="108" oninput="applyFilters()">
+          <label>آئی فون برائٹنس (Brightness): <span id="brightVal">112</span>%</label>
+          <input type="range" id="brightnessRange" min="80" max="160" value="112" oninput="applyFilters()">
         </div>
         <div class="control-group">
-          <label>کنٹراسٹ (Contrast): <span id="contrastVal">110</span>%</label>
-          <input type="range" id="contrastRange" min="90" max="150" value="110" oninput="applyFilters()">
+          <label>آئی فون کنٹراسٹ (Contrast): <span id="contrastVal">118</span>%</label>
+          <input type="range" id="contrastRange" min="90" max="160" value="118" oninput="applyFilters()">
         </div>
         <div class="control-group">
-          <label>کلر نکھار (Saturation): <span id="satVal">105</span>%</label>
-          <input type="range" id="satRange" min="80" max="140" value="105" oninput="applyFilters()">
+          <label>سٹوڈیو کلر نکھار (Saturation): <span id="satVal">110</span>%</label>
+          <input type="range" id="satRange" min="80" max="150" value="110" oninput="applyFilters()">
         </div>
         <div class="control-group">
-          <label>اسکن صفائی / ملائمت (Skin Smooth): <span id="smoothVal">5</span></label>
-          <input type="range" id="smoothRange" min="0" max="15" value="5" oninput="applyFilters()">
+          <label>سکن کلیئر اور اساموتھ (Skin Smooth): <span id="smoothVal">8</span></label>
+          <input type="range" id="smoothRange" min="0" max="20" value="8" oninput="applyFilters()">
         </div>
       </div>
 
       <div class="image-container">
-        <img id="displayImage" src="" alt="Processed Image">
+        <img id="displayImage" src="" alt="iPhone Processed Image">
       </div>
 
-      <button class="toggle-btn" id="toggleBtn" onmousedown="showOriginal()" onmouseup="showProcessed()" ontouchstart="showOriginal()" ontouchend="showProcessed()">👆 اصل تصویر دیکھنے کے لیے دبا کر رکھیں (Before)</button>
+      <button class="toggle-btn" id="toggleBtn" onmousedown="showOriginal()" onmouseup="showProcessed()" ontouchstart="showOriginal()" ontouchend="showProcessed()">👆 دیکھنے کے لیے دبا کر رکھیں (Before)</button>
 
-      <a href="#" id="downloadBtn" download="AS-Face-Clean-HD.jpg" class="download-btn">📥 ایچ ڈی تصویر ڈاؤن لوڈ کریں</a>
+      <a href="#" id="downloadBtn" download="AS-Face-Clean-iPhone-Pro.jpg" class="download-btn">📥 آئی فون ایچ ڈی تصویر ڈاؤن لوڈ کریں</a>
     </div>
 
     <canvas id="canvas" style="display:none;"></canvas>
@@ -294,15 +295,15 @@
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      // بنیادی فلٹرز اپلائی کرنا
+      // آئی فون کیمرہ پیور کلر گریڈنگ فلٹر
       ctx.filter = `contrast(${contrast}%) brightness(${brightness}%) saturate(${saturation}%)`;
       ctx.drawImage(originalImage, 0, 0);
 
-      // پکسل لیول پر داغ دھبے ہلکے کرنے اور اسکن کلین کرنے کا ایڈوانسڈ کنٹرول
+      // پکسل لیول پر طاقتور سکن کلیئرنگ اور داغ دھبے غائب کرنے کا الگورتھم
       if (smoothLevel > 0) {
         let imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
         let data = imgData.data;
-        let factor = smoothLevel * 0.4;
+        let factor = smoothLevel * 0.5;
 
         for (let i = 0; i < data.length; i += 4) {
           let r = data[i];
@@ -310,11 +311,11 @@
           let b = data[i+2];
           let avg = (r + g + b) / 3;
 
-          // سکن کے ٹونز کو نرم اور روشن کرنا تاکہ داغ دھبے مدہم ہو جائیں
-          if (avg > 30 && avg < 235) {
-            data[i]   = Math.min(255, r + factor);
-            data[i+1] = Math.min(255, g + factor);
-            data[i+2] = Math.min(255, b + factor);
+          // چہرے کے سیاہ دھبوں اور رف اسکن کو بیلنس کر کے پریمیم آئی فون گلو دینا
+          if (avg > 25 && avg < 245) {
+            data[i]   = Math.min(255, r * 1.04 + factor); 
+            data[i+1] = Math.min(255, g * 1.03 + factor); 
+            data[i+2] = Math.min(255, b * 1.02 + factor); 
           }
         }
         ctx.putImageData(imgData, 0, 0);
@@ -332,7 +333,7 @@
 
     function showProcessed() {
       displayImage.src = processedDataUrl;
-      document.getElementById('toggleBtn').innerText = "👆 اصل تصویر دیکھنے کے لیے دبا کر رکھیں (Before)";
+      document.getElementById('toggleBtn').innerText = "👆 دیکھنے کے لیے دبا کر رکھیں (Before)";
     }
   </script>
 
